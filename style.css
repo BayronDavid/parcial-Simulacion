@@ -1,0 +1,15 @@
+body{
+    height: 99vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.main-content{
+    height: 99%;
+    display: grid;
+    grid-template-columns: 75% 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 5px;
+    padding: 5px;
+}
