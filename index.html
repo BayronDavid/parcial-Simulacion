@@ -1,4 +1,3 @@
-<!-- Piñeros Santigo -->
 <!-- Morales Bayron -->
 <!DOCTYPE html>
 <html>
@@ -19,6 +18,9 @@
 			<div class="controllers border">
 				<!-- inputs and buttons -->
 				<div class="col  text-center">
+					<p class="">
+						<b>Espere a que las particulas se detengan para iniciar una nueva simulacion</b>
+					</p>
 					<div class="m-2 p-2 text-start border">
 						<div class="form-check">
 							<input id="radioButtonEuler"  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
@@ -33,11 +35,6 @@
 							</label>
 						</div>
 					</div>
-					<form class="m-2 p-2 d-flex justify-content-between border">
-						<label for="amountRange" class="form-label">Particulas</label>
-						<input id="nParticlesInputRange"  type="range" name="amountRange" min="1" max="1000" value="1000" oninput="this.form.amountInput.value=this.value" />
-						<input type="number" name="amountInput" min="1" max="1000" value="1000" oninput="this.form.amountRange.value=this.value" />
-					</form>
 					<div class="m-2">
 						<button id="situation1Button"  type="button" class="btn btn-primary">Situacion 1</button>
 					</div>
@@ -50,25 +47,21 @@
 				</div>
 				<div class="card m-2">
 					<div class="card-header">
-					  Calculos realizado 
+					  Condiciones
 					</div>
 					<div class="card-body">
-						<b><h6 class="text-center"  id="count"> </h6></b>
-						<p>
-							<b>F: </b> Frames <br>
-							<b>t: </b> Tiempo (s) <br>
-							<b>n: </b> Cantidad de particulas <br>
+						<p id="conditions">
+
 						</p>
 					</div>
 				  </div>
 				<div class="card m-2">
 					<div class="card-body">
 						<em>
-							Piñeros Andres Santiago <br>
 					 	 	Morales Bayron David
 						</em>
 						<br>	
-						<a href="https://github.com/Simulacion/Practica-ejercicios-de-Sistema-de-particulas.git" target="_blank" >Git Hub</a>
+						<a href="https://github.com/BayronDavid/parcial-Simulacion.git" target="_blank" >Git Hub</a>
 					</div>
 				  </div>
 			</div>

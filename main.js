@@ -17,8 +17,8 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100000
   );
-camera.position.x = -1000;
-camera.position.z = 10000;
+camera.position.x = -5000;
+camera.position.z = -10000;
 camera.position.y = 10000;
 
 const renderer = new THREE.WebGLRenderer();
@@ -43,7 +43,8 @@ gridHelperVertical.rotation.x = Math.PI/2;
 scene.add( gridHelper );
 
 //SITUATIONS--------------------------------------------------
-var h3Count = document.getElementById('count');
+var conditions = document.getElementById('conditions');
+
 
 var particles = []
 var count = 0;
@@ -71,18 +72,16 @@ function situation1() {
     scene.add(particles[1].getParticle());
     scene.add(particles[2].getParticle());
 
+    conditions.innerHTML = "Caída libre de 3 partículas cada una con una posición inicial diferente, color y diferente tamaño, una con rebote con constante de restitución de 0.5, otra con constante de restitución de 0.8, otra sin rebote, en el piso ubicado en y=-10:"
 }
 
-function situation2(n) {
+function situation2() {
   // Lanzamiento parabólico desde las coordenadas x=0, y=0, z=20, 
   // velocidades iniciales en x= -20, y=40, z=20. Con rebote en el piso 
   // y=0, y en una pared ubicada en el plano z=100, coeficiente de restitución
   // sólo para eje y con valor de 0.8, y coeficiente de restitución en eje z 
   // de 0.5 tiempo simulación = 10,  paso para el método numérico 0.1.
   scene.add( gridHelperVertical );
-  camera.position.x = -5000;
-  camera.position.z = -50000;
-  camera.position.y = 50000;
 
   count = 0;
   
@@ -93,17 +92,18 @@ function situation2(n) {
     particles.push(particle);
 
     scene.add(particles[0].getParticle());
+
+    conditions.innerHTML = "Lanzamiento parabólico desde las coordenadas x=0, y=0, z=20, velocidades iniciales en x= -20, y=40, z=20. Con rebote en el piso y=0, y en una pared ubicada en el plano z=100, coeficiente de restitución sólo para eje y con valor de 0.8, y coeficiente de restitución en eje z de 0.5 tiempo simulación = 10,  paso para el método numérico 0.1."
 }
 
-function situation3(n) {
+function situation3() {
+  scene.remove( gridHelperVertical);
   // Tiro parabólico de 3 partículas cada una con una posición inicial diferente, color y diferente tamaño, 
   // una con rebote con constante de restitución de 1,  otra con constante de restitución de 0.5, otra sin rebote, 
   // el piso se ubica en y=5.
 
   count = 0;
   particles = []
-
-  for (let i = 0; i < n*0.3; i++) {
                    //constructor(xn,    yn,     zn,  vxn, vyn,vzn,  mass, tam, color,                       krest,        suelo, parededZ)
     let particle1 = new Particle(-1000, 5000,  1000,   100,  100,   100,  10,    null, new THREE.Color(255, 0, 0), [1 ,  1,   1  ], 500);
     let particle2 = new Particle(1000,  5000,  1000,  -100,  100,   100,  10,    null, new THREE.Color(0, 0, 255), [0.5, 0.5, 0.5], 500);
@@ -117,13 +117,13 @@ function situation3(n) {
     scene.add(particles[0].getParticle());
     scene.add(particles[1].getParticle());
     scene.add(particles[2].getParticle());
-  }
+
+    conditions.innerHTML ="Tiro parabólico de 3 partículas cada una con una posición inicial diferente, color y diferente tamaño, una con rebote con constante de restitución de 1,  otra con constante de restitución de 0.5, otra sin rebote, el piso se ubica en y=5."
 }
 
 // EVENTS ------------------------------
 
 
-var nParticlesInputRange = document.getElementById('nParticlesInputRange');
 
 var radioButtonEuler = document.getElementById('radioButtonEuler');
 var radioButtonRK = document.getElementById('radioButtonRK');
@@ -133,16 +133,13 @@ var situation2Button = document.getElementById('situation2Button');
 var situation3Button = document.getElementById('situation3Button');
 
 situation1Button.addEventListener('click', ()=>{
-  var n = parseInt(nParticlesInputRange.value);
-  situation1(n);
+  situation1();
 })
 situation2Button.addEventListener('click', ()=>{
-  var n = parseInt(nParticlesInputRange.value);
-  situation2(n);
+  situation2();
 })
 situation3Button.addEventListener('click', ()=>{
-  var n = parseInt(nParticlesInputRange.value);
-  situation3(n);
+  situation3();
 })
 
 function animate() {
@@ -150,11 +147,9 @@ function animate() {
   for (let i = 0; i < particles.length; i++) {
     if (radioButtonRK.checked){
       particles[i].parabolicShot_RK();
-      h3Count.innerHTML = '204 * F * t * n';
     }
     if(radioButtonEuler.checked){
       particles[i].parabolicShot_Euler();
-      h3Count.innerHTML = '36 * F * t * n';
     }
   }
   
